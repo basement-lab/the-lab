@@ -1,6 +1,8 @@
 
 type Query {
   character(id: ID!): Character
+  film(id: ID!): Film
   user(id: ID!): User
   users(first: Int = 10, after: Int = 0): [User]!
+  vehicle(id: ID!): Vehicle
 }

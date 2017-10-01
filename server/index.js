@@ -14,9 +14,6 @@ import ProgressBarWebpackPlugin from 'progress-bar-webpack-plugin';
 import config from '../webpack.config';
 import logProvider from './logger';
 
-import onAPIShutdown from './api';
-import onGraphQLShutdown from './graphql';
-
 /******************************************************************************/
 
 const {
@@ -104,19 +101,13 @@ app.use(webpackHotMiddleware(compiler.compilers.find(c => c.name === 'client'), 
 /******************************************************************************/
 
 app.listen(PORT, () => {
-  console.log(blue(`SERVER: running on port:${PORT}`));
+  console.log(blue(`\nSERVER: running on port:${PORT}`));
 });
 
 /******************************************************************************/
 
-// require('./graphql.js');
-function onShutdown() {
-  console.log(blue('\nSERVER: shutting down...'));
-  onGraphQLShutdown();
-  onAPIShutdown();
-  process.exit();
-}
+require('./api');
+require('./graphql');
 
-process.on('SIGTERM', onShutdown);
-process.on('SIGINT', onShutdown);
+
 

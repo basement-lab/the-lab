@@ -1,5 +1,5 @@
 
-import { graphqlExpress, graphiqlExpress } from 'apollo-server-express';
+import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
 import { SubscriptionServer } from 'subscriptions-transport-ws';
 // import { PubSub } from 'graphql-subscriptions';
 import OpticsAgent from 'optics-agent';
@@ -14,7 +14,7 @@ import cors from 'cors';
 import express from 'express';
 import { magenta } from 'chalk';
 
-import { schema } from './schema';
+import schema from './schema';
 import postgres from '../db';
 
 /******************************************************************************/
@@ -99,6 +99,3 @@ new SubscriptionServer({ execute, schema, subscribe }, { server }); // eslint-di
 
 /******************************************************************************/
 
-export default function onShutdown() {
-  console.log(magenta('GraphQL: shutting down...')); // eslint-disable-line no-console
-}

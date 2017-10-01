@@ -13,7 +13,7 @@ import typeDefs, { fieldResolvers, scalar } from './Types';
 
 /******************************************************************************/
 
-export const schema = makeExecutableSchema({
+const schema = makeExecutableSchema({
   typeDefs,
   resolvers: {
     Query,
@@ -31,5 +31,5 @@ addResolveFunctionsToSchema(schema, fieldResolvers);
 
 /******************************************************************************/
 
-// export default schema;
+export default schema;
 

@@ -17,23 +17,19 @@ const {
   Express Server
 *******************************************************************************/
 
-const app = express();
+const api = express();
 
-app.use('*', cors({ origin: `http://localhost:${PORT}` }));
+api.use('*', cors({ origin: `http://localhost:${PORT}` }));
 
-app.use('/api', bodyParser.json());
+api.use('/api', bodyParser.json());
 
-app.use('/api/status', (req, res) => res.sendStatus(200));
+api.use('/api/status', (req, res) => res.sendStatus(200));
 
-app.use(router);
+api.use(router);
 
-app.listen(API_PORT, () => {
-  console.log(gray(`\nAPI: running on port:${API_PORT}`)); // eslint-disable-line no-console
+api.listen(API_PORT, () => {
+  console.log(gray(`API: running on port:${API_PORT}`)); // eslint-disable-line no-console
 });
 
 /******************************************************************************/
-
-export default function onShutdown() {
-  console.log(gray('API: shutting down...')); // eslint-disable-line no-console
-}
 
