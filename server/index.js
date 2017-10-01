@@ -13,13 +13,13 @@ import ProgressBarWebpackPlugin from 'progress-bar-webpack-plugin';
 import config from '../webpack.config';
 import logProvider from './logger';
 
-// import './api';
+import './api';
 
 /******************************************************************************/
 
 const {
   PORT = 3000,
-  // API_PORT = 3050,
+  API_PORT = 3050,
   GRAPHQL_PORT = 4000,
   GRAPHQL_PATH = '/subscriptions',
 } = process.env;
@@ -54,6 +54,16 @@ const devMiddleware = webpackDevMiddleware(compiler, {
  ******************************************************************************/
 
 const app = express();
+
+/******************************************************************************/
+
+app.use('/api', proxy({
+  target: `http://localhost:${API_PORT}`,
+  changeOrigin: true,
+  logLevel: 'debug',
+  logProvider,
+}));
+
 
 /******************************************************************************/
 
@@ -92,10 +102,9 @@ app.use(webpackHotMiddleware(compiler.compilers.find(c => c.name === 'client'), 
 /******************************************************************************/
 
 app.listen(PORT, () => {
-  console.log(blue(`\nSERVER: running on port:${PORT}`)); // eslint-disable-line no-console
+  console.log(blue(`SERVER: running on port:${PORT}`)); // eslint-disable-line no-console
 });
 
 /******************************************************************************/
 
 // require('./graphql.js');
-require('./db.js');

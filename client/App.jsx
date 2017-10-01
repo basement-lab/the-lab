@@ -9,7 +9,7 @@ import {
 
 import store, { history } from './store';
 import client from './client.js';
-import { Input } from './components';
+import { Input, Query } from './components';
 
 // import '../styles.css';
 
@@ -20,6 +20,7 @@ const App = () => (
     <Router history={history}>
       <div id="basement-lab">
         <Input />
+        <Query />
       </div>
     </Router>
   </Provider>
