@@ -2,4 +2,17 @@
 type Planet {
   id: ID!
   name: String
+  rotation_period: Int
+  orbital_period: Int
+  diameter: Int
+  climate: String
+  gravity: String
+  terrain: String
+  surface_water: Int
+  population: Int
+  residents: [Character]!
+  films: [Film]!
+  created: String
+  edited: String
+  url: String
 }

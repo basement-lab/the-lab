@@ -5,7 +5,7 @@
 
 import * as Character from './Character';
 import * as Film from './Film';
-// import * as Planet from './Planet';
+import * as Planet from './Planet';
 import * as Species from './Species';
 import * as Starship from './Starship';
 import * as User from './User';
@@ -34,7 +34,7 @@ import scalarTypes from './scalar.graphql';
 export const fieldResolvers = {
   Character,
   Film,
-  // Planet,
+  Planet,
   Species,
   Starship,
   User,
