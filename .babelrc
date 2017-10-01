@@ -1,0 +1,36 @@
+{
+  "presets": [
+    "env",
+    "react",
+    "stage-0"
+  ],
+  "plugins": [
+    [
+      "inline-import",
+      {
+        "extensions": [
+          ".json",
+          ".sql"
+        ]
+      }
+    ],
+    [
+      "transform-class-properties",
+      {
+        "spec": true
+      }
+    ],
+    "styled-components",
+    "inline-import-graphql-ast"
+  ],
+  "env": {
+    "targets": {
+      "node": "current"
+    },
+    "development": {
+      // "sourceMaps": "inline"
+      "sourceMaps": "source-map"
+    }
+  },
+  "retainLines": true
+}
