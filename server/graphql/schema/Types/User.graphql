@@ -1,0 +1,11 @@
+
+type UserFavorites {
+  character: [Character]!
+}
+
+type User {
+  id: ID!
+  firstname: String!
+  lastname: String!
+  favorites: UserFavorites
+}

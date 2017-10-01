@@ -1,0 +1,6 @@
+
+type Query {
+  character(id: ID!): Character
+  user(id: ID!): User
+  users(first: Int = 10, after: Int = 0): [User]!
+}

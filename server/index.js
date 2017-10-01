@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 
 import express from 'express';
 import history from 'connect-history-api-fallback';
@@ -5,7 +6,7 @@ import proxy from 'http-proxy-middleware';
 import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
-import { blue } from 'chalk';
+import { blue, gray, magenta } from 'chalk';
 
 // import FriendlyErrorsWebpackPlugin from 'friendly-errors-webpack-plugin';
 import ProgressBarWebpackPlugin from 'progress-bar-webpack-plugin';
@@ -13,7 +14,8 @@ import ProgressBarWebpackPlugin from 'progress-bar-webpack-plugin';
 import config from '../webpack.config';
 import logProvider from './logger';
 
-import './api';
+import onAPIShutdown from './api';
+import onGraphQLShutdown from './graphql';
 
 /******************************************************************************/
 
@@ -102,9 +104,19 @@ app.use(webpackHotMiddleware(compiler.compilers.find(c => c.name === 'client'), 
 /******************************************************************************/
 
 app.listen(PORT, () => {
-  console.log(blue(`SERVER: running on port:${PORT}`)); // eslint-disable-line no-console
+  console.log(blue(`SERVER: running on port:${PORT}`));
 });
 
 /******************************************************************************/
 
 // require('./graphql.js');
+function onShutdown() {
+  console.log(blue('\nSERVER: shutting down...'));
+  onGraphQLShutdown();
+  onAPIShutdown();
+  process.exit();
+}
+
+process.on('SIGTERM', onShutdown);
+process.on('SIGINT', onShutdown);
+
